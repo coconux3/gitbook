@@ -21,14 +21,14 @@ jobs:
             COREPACK_ENABLE_PROJECT_SPEC: 0
         steps:
             - name: Checkout Repo
-              uses: actions/checkout@v3
+              uses: actions/checkout@v3.7.0
               with:
                   # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
                   fetch-depth: 0
                   # Otherwise git pushes with GITHUB_TOKEN instead of the PAT, and the release PR never triggers Preview
                   persist-credentials: false
             - name: Setup Node
-              uses: actions/setup-node@v4
+              uses: actions/setup-node@v4.4.0
               with:
                   node-version: 22
                   registry-url: 'https://registry.npmjs.org'
@@ -37,14 +37,14 @@ jobs:
                   corepack enable npm
                   corepack install -g npm@latest
             - name: Setup Bun
-              uses: ./.github/composite/setup-bun
+              uses: $/.github/composite/setup-bun
             - name: Install dependencies
               run: bun install --frozen-lockfile
               env:
                   PUPPETEER_SKIP_DOWNLOAD: 1
             - name: Create Release Pull Request
               id: changesets
-              uses: changesets/action@v1
+              uses: changesets/action@v1.9.0
               with:
                   publish: bun run publish-all-packages
                   version: bun run changeset-version

@@ -4,6 +4,6 @@ runs:
     using: 'composite'
     steps:
         - name: Setup bun
-          uses: oven-sh/setup-bun@v2
+          uses: oven-sh/setup-bun@v2.2.0
           with:
               bun-version-file: 'package.json'

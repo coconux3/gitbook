@@ -12,9 +12,9 @@ jobs:
         timeout-minutes: 6
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v4.4.0
             - name: Setup Bun
-              uses: ./.github/composite/setup-bun
+              uses: $/.github/composite/setup-bun
             - name: Install dependencies
               run: bun install --frozen-lockfile
               env:
@@ -26,9 +26,9 @@ jobs:
         timeout-minutes: 6
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v4.4.0
             - name: Setup Bun
-              uses: ./.github/composite/setup-bun
+              uses: $/.github/composite/setup-bun
             - name: Install dependencies
               run: bun install --frozen-lockfile
               env:
@@ -40,9 +40,9 @@ jobs:
         timeout-minutes: 6
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v4.4.0
             - name: Setup Bun
-              uses: ./.github/composite/setup-bun
+              uses: $/.github/composite/setup-bun
             - name: Install dependencies
               run: bun install --frozen-lockfile
               env:
@@ -54,9 +54,9 @@ jobs:
         timeout-minutes: 6
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v4.4.0
             - name: Setup Bun
-              uses: ./.github/composite/setup-bun
+              uses: $/.github/composite/setup-bun
             - name: Install dependencies
               run: bun install
               env:
@@ -68,9 +68,9 @@ jobs:
         timeout-minutes: 6
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v4.4.0
             - name: Setup Bun
-              uses: ./.github/composite/setup-bun
+              uses: $/.github/composite/setup-bun
             - name: Install dependencies
               run: bun install --frozen-lockfile
               env:

@@ -30,7 +30,7 @@ runs:
     using: 'composite'
     steps:
         - name: Setup Bun
-          uses: ./.github/composite/setup-bun
+          uses: $/.github/composite/setup-bun
         - name: Install dependencies
           run: bun install --frozen-lockfile
           shell: bash
@@ -43,7 +43,7 @@ runs:
               VERCEL_ORG_ID: ${{ inputs.vercelOrg }}
               VERCEL_PROJECT_ID: ${{ inputs.vercelProject }}
         - name: Load secret
-          uses: 1password/load-secrets-action@v2
+          uses: 1password/load-secrets-action@v2.0.0
           env:
               OP_SERVICE_ACCOUNT_TOKEN: ${{ inputs.opServiceAccount }}
               GITBOOK_URL: ${{ inputs.opItem }}/GITBOOK_URL

@@ -33,12 +33,12 @@ jobs:
             deployment-url: ${{ steps.deploy.outputs.deployment-url }}
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v4.4.0
               with:
                   ref: ${{ github.event.pull_request.head.sha || github.sha }}
             - name: Deploy to Vercel
               id: deploy
-              uses: ./.github/composite/deploy-vercel
+              uses: $/.github/composite/deploy-vercel
               with:
                   environment: preview
                   vercelOrg: ${{ secrets.VERCEL_ORG_ID }}
@@ -60,12 +60,12 @@ jobs:
             deployment-url: ${{ steps.deploy.outputs.deployment-url || steps.extract-worker-id.outputs.worker-url }}
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v4.4.0
               with:
                   ref: ${{ github.event.pull_request.head.sha || github.sha }}
             - name: Deploy to Cloudflare
               id: deploy
-              uses: ./.github/composite/deploy-cloudflare
+              uses: $/.github/composite/deploy-cloudflare
               with:
                   environment: preview
                   deploy: ${{ github.ref == 'refs/heads/main' }}
@@ -95,7 +95,7 @@ jobs:
             - deploy-v2-cloudflare
         steps:
             - name: Find GitHub Comment
-              uses: peter-evans/find-comment@v3
+              uses: peter-evans/find-comment@v3.1.0
               id: fc
               with:
                   issue-number: ${{ github.event.pull_request.number }}
@@ -122,7 +122,7 @@ jobs:
                   echo "cloudflare=$CLOUDFLARE_URL" >> "$GITHUB_OUTPUT"
 
             - name: Create or update GitHub comment
-              uses: peter-evans/create-or-update-comment@v4
+              uses: peter-evans/create-or-update-comment@v4.0.0
               with:
                   comment-id: ${{ steps.fc.outputs.comment-id }}
                   issue-number: ${{ github.event.pull_request.number }}
@@ -149,11 +149,11 @@ jobs:
         timeout-minutes: 15
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v4.4.0
               with:
                   ref: ${{ github.event.pull_request.head.sha || github.sha }}
             - name: Setup Bun
-              uses: ./.github/composite/setup-bun
+              uses: $/.github/composite/setup-bun
             - name: Install dependencies
               run: bun install --frozen-lockfile
               env:
@@ -173,11 +173,11 @@ jobs:
         timeout-minutes: 15
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v4.4.0
               with:
                   ref: ${{ github.event.pull_request.head.sha || github.sha }}
             - name: Setup Bun
-              uses: ./.github/composite/setup-bun
+              uses: $/.github/composite/setup-bun
             - name: Install dependencies
               run: bun install --frozen-lockfile
               env:
@@ -197,11 +197,11 @@ jobs:
         timeout-minutes: 30
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v4.4.0
               with:
                   ref: ${{ github.event.pull_request.head.sha || github.sha }}
             - name: Setup Bun
-              uses: ./.github/composite/setup-bun
+              uses: $/.github/composite/setup-bun
             - name: Install dependencies
               run: bun install --frozen-lockfile
               env:
@@ -246,7 +246,7 @@ jobs:
 
             - name: Find style invalidation comment
               if: ${{ !cancelled() && github.event_name != 'push' && steps.style-perf.outputs.body != '' }}
-              uses: peter-evans/find-comment@v3
+              uses: peter-evans/find-comment@v3.1.0
               id: fc-style-perf
               with:
                   issue-number: ${{ github.event.pull_request.number }}
@@ -255,7 +255,7 @@ jobs:
 
             - name: Create or update style invalidation comment
               if: ${{ !cancelled() && github.event_name != 'push' && steps.style-perf.outputs.body != '' }}
-              uses: peter-evans/create-or-update-comment@v4
+              uses: peter-evans/create-or-update-comment@v4.0.0
               with:
                   comment-id: ${{ steps.fc-style-perf.outputs.comment-id }}
                   issue-number: ${{ github.event.pull_request.number }}
@@ -269,11 +269,11 @@ jobs:
         timeout-minutes: 30
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v4.4.0
               with:
                   ref: ${{ github.event.pull_request.head.sha || github.sha }}
             - name: Setup Bun
-              uses: ./.github/composite/setup-bun
+              uses: $/.github/composite/setup-bun
             - name: Install dependencies
               run: bun install --frozen-lockfile
               env:
@@ -292,11 +292,11 @@ jobs:
         if: ${{ !cancelled() && needs.deploy-v2-vercel.result == 'success' }}
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v4.4.0
               with:
                   ref: ${{ github.event.pull_request.head.sha || github.sha }}
             - name: Setup Bun
-              uses: ./.github/composite/setup-bun
+              uses: $/.github/composite/setup-bun
             - name: Install dependencies
               run: bun install --frozen-lockfile
               env:

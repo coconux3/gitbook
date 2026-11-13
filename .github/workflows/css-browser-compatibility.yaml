@@ -20,9 +20,9 @@ jobs:
         steps:
             # pull_request_target checks out the trusted base branch by default. Never use the PR ref here.
             - name: Checkout trusted checker
-              uses: actions/checkout@v4
+              uses: actions/checkout@v4.4.0
             - name: Setup Bun
-              uses: ./.github/composite/setup-bun
+              uses: $/.github/composite/setup-bun
             - name: Install dependencies
               run: bun install --frozen-lockfile
               env:
